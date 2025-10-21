@@ -1,0 +1,383 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>RecShop • Protótipo HTML/CSS</title>
+  <style>
+    :root{
+      --bg:#0f172a; /* slate-900 */
+      --card:#111827; /* gray-900 */
+      --muted:#94a3b8; /* slate-400 */
+      --text:#e5e7eb; /* gray-200 */
+      --brand:#22d3ee; /* cyan-400 */
+      --accent:#38bdf8; /* sky-400 */
+      --ok:#22c55e; /* green-500 */
+      --warn:#f59e0b; /* amber-500 */
+      --bad:#ef4444; /* red-500 */
+      --border: #1f2937; /* gray-800 */
+      --shadow: 0 10px 25px rgba(0,0,0,.35);
+      --radius: 16px;
+    }
+
+    *{box-sizing:border-box}
+    html,body{height:100%}
+    body{margin:0;background:linear-gradient(180deg, #0b1022, #0a1229 40%, #0d1220);color:var(--text);font:16px/1.5 system-ui, -apple-system, Segoe UI, Roboto, Arial, Noto Sans, "Helvetica Neue", sans-serif}
+
+    /* Layout */
+    header{
+      position:sticky;top:0;z-index:10;background:rgba(10,12,24,.7);backdrop-filter: blur(8px);
+      border-bottom:1px solid var(--border);
+    }
+    .container{max-width:1100px;margin:0 auto;padding:16px}
+    nav{
+      display:flex;gap:16px;align-items:center;justify-content:space-between
+    }
+    .brand{display:flex;gap:10px;align-items:center;font-weight:700;letter-spacing:.3px}
+    .brand .dot{width:10px;height:10px;border-radius:9999px;background:linear-gradient(135deg,var(--brand),var(--accent))}
+    .tabs{display:flex;gap:8px;flex-wrap:wrap}
+    .tabs a{padding:10px 14px;border:1px solid var(--border);border-radius:999px;color:var(--text);text-decoration:none;opacity:.85}
+    .tabs a[aria-current="page"], .tabs a:hover{background:linear-gradient(135deg, rgba(34,211,238,.15), rgba(56,189,248,.15));opacity:1}
+
+    main{padding:24px 0}
+    section.view{display:none}
+    section.view.active{display:block}
+
+    /* Cards & form elements */
+    .grid{display:grid;gap:16px}
+    .grid.cols-2{grid-template-columns:repeat(2, minmax(0,1fr))}
+    .grid.cols-3{grid-template-columns:repeat(3, minmax(0,1fr))}
+    @media (max-width: 900px){.grid.cols-2,.grid.cols-3{grid-template-columns:1fr}}
+
+    .card{background:linear-gradient(180deg, rgba(255,255,255,.02), rgba(255,255,255,.01));border:1px solid var(--border);border-radius:var(--radius);box-shadow:var(--shadow);padding:18px}
+
+    label{display:block;margin-bottom:8px;color:var(--muted);font-size:.9rem}
+    input, select, textarea{width:100%;padding:12px;border-radius:12px;border:1px solid var(--border);background:#0b1222;color:var(--text)}
+    input:focus, select:focus, textarea:focus{outline:2px solid rgba(34,211,238,.35);outline-offset:1px}
+
+    .btn{display:inline-flex;align-items:center;gap:8px;padding:12px 16px;border-radius:12px;border:1px solid var(--border);color:var(--text);text-decoration:none;background:linear-gradient(135deg, rgba(34,211,238,.2), rgba(56,189,248,.2));}
+    .btn:hover{filter:brightness(1.05)}
+    .btn.secondary{background:transparent}
+    .btn.destructive{background:rgba(239,68,68,.15);border-color:#7f1d1d}
+
+    .kpi{display:flex;gap:16px;align-items:center}
+    .kpi .dot{width:10px;height:10px;border-radius:9999px}
+    .kpi.small{font-size:.9rem;color:var(--muted)}
+
+    .map{height:360px;border-radius:var(--radius);border:1px dashed var(--border);display:grid;place-items:center;color:var(--muted)}
+    .tag{display:inline-block;padding:4px 8px;border-radius:999px;border:1px solid var(--border);font-size:.8rem;color:var(--muted)}
+
+    .list{display:grid;gap:12px}
+    .item{display:flex;gap:16px;align-items:center;justify-content:space-between;padding:14px;border:1px solid var(--border);border-radius:14px;background:rgba(255,255,255,.02)}
+    .item .meta{display:flex;gap:8px;flex-wrap:wrap}
+
+    .muted{color:var(--muted)}
+    .price{font-weight:700}
+    .footer{margin-top:24px;color:var(--muted);font-size:.85rem}
+    .divider{height:1px;background:var(--border);margin:16px 0}
+  </style>
+</head>
+<body>
+  <header>
+    <div class="container">
+      <nav>
+        <div class="brand" aria-label="RecShop">
+          <span class="dot" aria-hidden="true"></span>
+          <span>RecShop</span>
+        </div>
+        <div class="tabs" role="tablist" aria-label="Navegação das telas">
+          <a href="#buscar" role="tab" aria-selected="true" aria-current="page">1. Buscar & Reservar</a>
+          <a href="#ponto" role="tab">2. Detalhe & Confirmar</a>
+          <a href="#checkin" role="tab">3. Check-in & Autenticar</a>
+          <a href="#sessao" role="tab">4. Sessão & Pagamento</a>
+        </div>
+      </nav>
+    </div>
+  </header>
+
+  <main class="container">
+    <!-- 1) BUSCA & RESERVA -->
+    <section id="buscar" class="view active" aria-labelledby="buscar-title">
+      <h2 id="buscar-title">Buscar pontos de recarga</h2>
+      <div class="grid cols-2">
+        <div class="card">
+          <form aria-labelledby="buscar-title">
+            <div class="grid cols-2">
+              <div>
+                <label for="local">Localização</label>
+                <input id="local" name="local" placeholder="Endereço ou bairro" required />
+              </div>
+              <div>
+                <label for="veiculo">Veículo</label>
+                <select id="veiculo" name="veiculo">
+                  <option>Meu EV • CCS2</option>
+                  <option>Van Elétrica • Tipo 2</option>
+                </select>
+              </div>
+              <div>
+                <label for="conector">Tipo de conector</label>
+                <select id="conector" name="conector">
+                  <option value="">Qualquer</option>
+                  <option>CCS2</option>
+                  <option>Tipo 2</option>
+                  <option>CHAdeMO</option>
+                </select>
+              </div>
+              <div>
+                <label for="potencia">Potência mínima (kW)</label>
+                <input id="potencia" name="potencia" type="number" placeholder="7, 22, 50..." />
+              </div>
+              <div>
+                <label for="preco">Preço máx. (R$/kWh)</label>
+                <input id="preco" name="preco" type="number" step="0.01" placeholder="Ex.: 2,50" />
+              </div>
+              <div>
+                <label for="quando">Data e hora</label>
+                <input id="quando" name="quando" type="datetime-local" />
+              </div>
+            </div>
+            <div style="margin-top:12px;display:flex;gap:8px;flex-wrap:wrap">
+              <button class="btn" type="button" data-action="buscar">Buscar</button>
+              <a class="btn secondary" href="#" role="button">Limpar filtros</a>
+            </div>
+          </form>
+          <p class="footer">Dica: selecione o <strong>veículo</strong> para compatibilidade de conectores.</p>
+        </div>
+        <div class="card">
+          <div class="map" role="img" aria-label="Mapa placeholder">
+            <!-- Placeholder para mapa (Leaflet/Google Maps). Substituir via JS. -->
+            <span>🗺️ Mapa (placeholder)</span>
+          </div>
+          <div class="divider"></div>
+          <div class="list" aria-label="Resultados">
+            <div class="item">
+              <div>
+                <div><strong>Estac. Central Mall</strong></div>
+                <div class="meta">
+                  <span class="tag">CCS2 • 150 kW</span>
+                  <span class="tag">3,20 R$/kWh</span>
+                  <span class="tag">1,1 km</span>
+                  <span class="tag">⭐ 4.7</span>
+                </div>
+              </div>
+              <div>
+                <a class="btn" href="#ponto" data-id="A1">Ver detalhes</a>
+              </div>
+            </div>
+            <div class="item">
+              <div>
+                <div><strong>Hotel Lago Azul</strong></div>
+                <div class="meta">
+                  <span class="tag">Tipo 2 • 22 kW</span>
+                  <span class="tag">2,40 R$/kWh</span>
+                  <span class="tag">2,3 km</span>
+                  <span class="tag">⭐ 4.4</span>
+                </div>
+              </div>
+              <div>
+                <a class="btn" href="#ponto" data-id="B2">Ver detalhes</a>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- 2) DETALHE DO PONTO & CONFIRMAÇÃO -->
+    <section id="ponto" class="view" aria-labelledby="ponto-title">
+      <h2 id="ponto-title">Detalhe do ponto & confirmação</h2>
+      <div class="grid cols-2">
+        <div class="card">
+          <div class="grid cols-2">
+            <div>
+              <p class="muted">Ponto</p>
+              <h3>Estac. Central Mall</h3>
+              <p class="muted">Av. Principal, 123 • Centro</p>
+              <div class="meta" style="margin:6px 0 8px 0">
+                <span class="tag">Aberto 08:00–22:00</span>
+                <span class="tag">Estacionamento pago</span>
+                <span class="tag">Wifi</span>
+              </div>
+            </div>
+            <div>
+              <p class="muted">Conectores</p>
+              <div class="list">
+                <div class="item">
+                  <div>CCS2 • <strong>150 kW</strong></div>
+                  <div class="price">3,20 R$/kWh</div>
+                </div>
+                <div class="item">
+                  <div>Tipo 2 • <strong>22 kW</strong></div>
+                  <div class="price">2,40 R$/kWh</div>
+                </div>
+              </div>
+            </div>
+          </div>
+          <div class="divider"></div>
+          <div class="map" role="img" aria-label="Mapa do ponto">
+            <span>📍 Mapa do ponto (placeholder)</span>
+          </div>
+        </div>
+
+        <div class="card">
+          <form aria-label="Confirmar reserva">
+            <div class="grid cols-2">
+              <div>
+                <label for="veiculo2">Veículo</label>
+                <select id="veiculo2">
+                  <option>Meu EV • CCS2</option>
+                  <option>Van Elétrica • Tipo 2</option>
+                </select>
+              </div>
+              <div>
+                <label for="conector2">Conector</label>
+                <select id="conector2">
+                  <option>CCS2 • 150 kW</option>
+                  <option>Tipo 2 • 22 kW</option>
+                </select>
+              </div>
+              <div>
+                <label for="inicio">Início</label>
+                <input id="inicio" type="datetime-local" />
+              </div>
+              <div>
+                <label for="fim">Fim</label>
+                <input id="fim" type="datetime-local" />
+              </div>
+            </div>
+            <p class="muted" style="margin:10px 0">Estimativa (simulação): <strong>18,4 kWh</strong> • <strong>R$ 58,88</strong></p>
+            <div style="display:flex;gap:8px;flex-wrap:wrap">
+              <a class="btn" href="#checkin" data-action="confirmar">Confirmar reserva</a>
+              <a class="btn secondary" href="#buscar">Voltar</a>
+            </div>
+          </form>
+        </div>
+      </div>
+    </section>
+
+    <!-- 3) CHECK-IN & AUTENTICAÇÃO -->
+    <section id="checkin" class="view" aria-labelledby="checkin-title">
+      <h2 id="checkin-title">Check-in & autenticação</h2>
+      <div class="grid cols-2">
+        <div class="card">
+          <div class="grid cols-2">
+            <div>
+              <p class="muted">Reserva</p>
+              <h3>#RS-2025-0902-A1</h3>
+              <p class="muted">Estac. Central Mall • Conector CCS2 • 150 kW</p>
+              <p class="muted">Veículo: Meu EV • CCS2</p>
+            </div>
+            <div>
+              <p class="muted">Status da Estação</p>
+              <div class="kpi small"><span class="dot" style="background:var(--ok)"></span>Online</div>
+              <div class="kpi small"><span class="dot" style="background:var(--warn)"></span>Vaga ocupada até 14:00</div>
+            </div>
+          </div>
+          <div class="divider"></div>
+          <div class="grid cols-2">
+            <div>
+              <label for="codigoConector">Código do conector</label>
+              <input id="codigoConector" placeholder="Ex.: A1-CCS2-03" />
+            </div>
+            <div>
+              <label for="rfid">Cartão RFID (opcional)</label>
+              <input id="rfid" placeholder="Aproxime o cartão" />
+            </div>
+          </div>
+          <p class="muted">Ou use o QR Code ao lado para iniciar a sessão.</p>
+        </div>
+        <div class="card" style="display:grid;place-items:center;min-height:300px">
+          <!-- Placeholder para QRCode / Scanner -->
+          <div style="text-align:center">
+            <div style="width:180px;height:180px;border-radius:12px;border:1px dashed var(--border);display:grid;place-items:center;margin:auto">QR</div>
+            <p class="muted" style="margin-top:8px">Escaneie o QR no conector para autenticar</p>
+            <a class="btn" href="#sessao" style="margin-top:10px">Iniciar sessão</a>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- 4) SESSÃO EM ANDAMENTO & PAGAMENTO -->
+    <section id="sessao" class="view" aria-labelledby="sessao-title">
+      <h2 id="sessao-title">Sessão em andamento & pagamento</h2>
+      <div class="grid cols-2">
+        <div class="card">
+          <div class="grid cols-3">
+            <div>
+              <p class="muted">Energia</p>
+              <h3>12,6 kWh</h3>
+            </div>
+            <div>
+              <p class="muted">Tempo</p>
+              <h3>00:32:18</h3>
+            </div>
+            <div>
+              <p class="muted">Estimativa</p>
+              <h3>R$ 40,32</h3>
+            </div>
+          </div>
+          <div class="divider"></div>
+          <div class="map" role="img" aria-label="Gráfico/telemetria placeholder">
+            <span>📈 Telemetria (placeholder)</span>
+          </div>
+          <div style="margin-top:12px;display:flex;gap:8px;flex-wrap:wrap">
+            <button class="btn destructive" type="button">Encerrar sessão</button>
+            <a class="btn secondary" href="#checkin">Voltar</a>
+          </div>
+        </div>
+        <div class="card">
+          <h3>Pagamento</h3>
+          <p class="muted">Revise os detalhes antes de pagar.</p>
+          <ul class="list" style="margin:12px 0">
+            <li class="item"><span>Energia (kWh)</span><span>12,6</span></li>
+            <li class="item"><span>Tarifa (R$/kWh)</span><span>3,20</span></li>
+            <li class="item"><span>Taxa ociosa</span><span>R$ 0,00</span></li>
+            <li class="item"><strong>Total</strong><strong>R$ 40,32</strong></li>
+          </ul>
+          <form aria-label="Pagamento">
+            <label for="metodo">Método de pagamento</label>
+            <select id="metodo">
+              <option>Cartão de crédito</option>
+              <option>Cartão de débito</option>
+              <option>PIX</option>
+            </select>
+            <div style="display:flex;gap:8px;margin-top:12px;flex-wrap:wrap">
+              <button class="btn" type="button">Pagar & Emitir NF-e</button>
+              <a class="btn secondary" href="#buscar">Concluir</a>
+            </div>
+          </form>
+        </div>
+      </div>
+    </section>
+  </main>
+
+  <footer class="container footer">
+    <span>Protótipo estático • Insira JS para conectar APIs (mapa, OCPP/OCPI, pagamentos, NF-e).</span>
+  </footer>
+
+  <script>
+    // Navegação por hash simples (SPA mínima sem dependências)
+    const views = document.querySelectorAll('section.view');
+    const tabs = document.querySelectorAll('.tabs a');
+    function setActiveFromHash(){
+      const hash = window.location.hash || '#buscar';
+      views.forEach(v=>v.classList.toggle('active', '#'+v.id===hash));
+      tabs.forEach(a=>{
+        const isActive = a.getAttribute('href')===hash;
+        a.setAttribute('aria-current', isActive? 'page': 'false');
+        a.setAttribute('aria-selected', isActive? 'true': 'false');
+      });
+    }
+    window.addEventListener('hashchange', setActiveFromHash);
+    setActiveFromHash();
+
+    // Ganchos de JS para futura integração:
+    // [data-action="buscar"] → executar busca com filtros.
+    // Links "Ver detalhes" → preencher tela de ponto com dados selecionados.
+    // "Confirmar reserva" → criar reserva e redirecionar para check-in.
+    // "Iniciar sessão" → handshake/autenticação e redirecionar para sessão.
+    // "Encerrar sessão" → finalizar medição, calcular total.
+    // "Pagar & Emitir NF-e" → gateway + emissão de NF.
+  </script>
+</body>
+</html>
