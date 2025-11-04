@@ -1,0 +1,533 @@
+{
+  "users": [
+    {
+      "id": "host1",
+      "nome": "Operador Sul",
+      "role": "host",
+      "email": "operadorsul@email.com",
+      "updatedAt": "04/11/2025, 11:44:28",
+      "active": true,
+      "doc": "02154545000145",
+      "ptype": "PJ",
+      "bank": {
+        "bank": "Nubank",
+        "agency": "0001",
+        "account": "123456",
+        "pixType": "Telefone",
+        "pixKey": "21978564377",
+        "holder": "Ronaldo Menezes",
+        "holderDoc": "123455664899",
+        "accounts": [
+          {
+            "id": "31nok5w",
+            "bank": "Nubank",
+            "agency": "0001",
+            "account": "123456"
+          }
+        ],
+        "primary": {
+          "kind": "account",
+          "id": "31nok5w"
+        },
+        "cards": [
+          {
+            "id": "az33vy0",
+            "last4": "1122",
+            "holder": "Ronaldo Menezes"
+          }
+        ]
+      }
+    },
+    {
+      "id": "host2",
+      "nome": "Operador Norte",
+      "email": "host2@recshop.com",
+      "password": "host123",
+      "role": "host"
+    },
+    {
+      "id": "wth1tte",
+      "nome": "Patricia",
+      "role": "driver",
+      "email": "pat@email.com",
+      "doc": "12345678912",
+      "ptype": "PF",
+      "updatedAt": "28/10/2025, 12:20:49",
+      "bank": {
+        "bank": "",
+        "agency": "",
+        "account": "",
+        "cards": [
+          {
+            "id": "lkv7y63",
+            "last12": "956333344444",
+            "last4": "4444",
+            "brand": "Mastercard",
+            "exp": "10/28",
+            "holder": "Paula Santos"
+          }
+        ],
+        "primary": {
+          "kind": "card",
+          "id": "lkv7y63"
+        }
+      }
+    },
+    {
+      "id": "jzo30tq",
+      "nome": "APM",
+      "role": "host",
+      "bank": {
+        "bank": "Banco do Brasil",
+        "agency": "0001",
+        "account": "25333333",
+        "cards": [
+          {
+            "id": "plrskou",
+            "last12": "233335456987",
+            "last4": "6987",
+            "brand": "Visa",
+            "exp": "10/35",
+            "holder": "Max Martin"
+          }
+        ]
+      },
+      "updatedAt": "28/10/2025, 11:34:07"
+    },
+    {
+      "id": "5jlh1ds",
+      "nome": "Patricia Mansano",
+      "role": "driver",
+      "email": "patricia@email.com",
+      "cpf": "12345678915",
+      "end": "Rua dos Peixes",
+      "bank": {
+        "cards": [
+          {
+            "id": "3fs0gid",
+            "last12": "557777888999",
+            "last4": "8999",
+            "brand": "Visa",
+            "exp": "12/38",
+            "holder": "Patricia Silva"
+          }
+        ],
+        "primary": {
+          "kind": "card",
+          "id": "3fs0gid"
+        }
+      },
+      "updatedAt": "28/10/2025, 12:19:44"
+    },
+    {
+      "id": "xhavxlm",
+      "nome": "Patricia Mansano",
+      "email": "patricia@gmail.com",
+      "password": "123456",
+      "role": "host",
+      "bank": {
+        "accounts": [
+          {
+            "id": "ekzhzvh",
+            "bank": "Itaú",
+            "agency": "0012",
+            "account": "0111111"
+          }
+        ],
+        "primary": {
+          "kind": "account",
+          "id": "ekzhzvh"
+        }
+      },
+      "updatedAt": "28/10/2025, 12:20:00"
+    },
+    {
+      "id": "yq9cnvg",
+      "nome": "Patricia Mansano",
+      "email": "adm@gmail.com",
+      "password": "123456",
+      "role": "admin",
+      "ptype": "PF",
+      "doc": "12233333666",
+      "updatedAt": "27/10/2025, 18:56:12",
+      "bank": {
+        "bank": "",
+        "agency": "",
+        "account": ""
+      }
+    },
+    {
+      "id": "enxsvc7",
+      "nome": "Tom Jobim",
+      "email": "tom@email.com",
+      "password": "795869",
+      "role": "driver",
+      "doc": "12789687845",
+      "ptype": "PF",
+      "active": true,
+      "createdAt": "26/10/2025, 23:41:00",
+      "updatedAt": "28/10/2025, 12:41:33",
+      "bank": {
+        "bank": "",
+        "agency": "",
+        "account": "",
+        "cards": [
+          {
+            "id": "55utfif",
+            "last12": "588888888888",
+            "last4": "8888",
+            "brand": "Visa",
+            "exp": "10/38",
+            "holder": "Tom Jobim"
+          }
+        ],
+        "primary": {
+          "kind": "card",
+          "id": "55utfif"
+        }
+      }
+    },
+    {
+      "id": "2v4ktiu",
+      "nome": "Carlo Silva",
+      "email": "carlo@recshop.com",
+      "password": "123456",
+      "role": "subAdmin",
+      "doc": "13365489789",
+      "ptype": "PF",
+      "active": true,
+      "createdAt": "04/11/2025, 16:43:59",
+      "updatedAt": "04/11/2025, 16:43:59"
+    },
+    {
+      "id": "3b123bz",
+      "nome": "Jonas Bloch",
+      "email": "jonasbloch@email.com",
+      "password": "123456",
+      "role": "driver",
+      "doc": "78965423333",
+      "ptype": "PF",
+      "active": true,
+      "createdAt": "04/11/2025, 18:15:57",
+      "updatedAt": "04/11/2025, 18:29:52"
+    }
+  ],
+  "stations": [
+    {
+      "id": "st1",
+      "nome": "Shopping Atlântico",
+      "cidade": "Niterói",
+      "uf": "RJ",
+      "endereco": "Av. Atlântica, 100",
+      "tipoLocal": "Comercial",
+      "ports": 4,
+      "hostId": "host1",
+      "conector": "Tipo 2",
+      "potencia": 22,
+      "preco": 2.6,
+      "days": [
+        "Seg",
+        "Ter",
+        "Qua",
+        "Qui",
+        "Sex"
+      ],
+      "open": "08:00",
+      "close": "22:00",
+      "active": true
+    },
+    {
+      "id": "st2",
+      "nome": "Posto Aero",
+      "cidade": "Rio de Janeiro",
+      "uf": "RJ",
+      "endereco": "Av. Aeroporto, 50",
+      "tipoLocal": "Comercial",
+      "ports": 6,
+      "hostId": "host1",
+      "conector": "CC",
+      "potencia": 60,
+      "preco": 2.9,
+      "days": [
+        "Seg",
+        "Ter",
+        "Qua",
+        "Qui",
+        "Sex",
+        "Sáb"
+      ],
+      "open": "08:00",
+      "close": "00:00",
+      "active": true
+    },
+    {
+      "id": "st3",
+      "nome": "Parque Central",
+      "cidade": "Niterói",
+      "uf": "RJ",
+      "endereco": "R. das Árvores, 200",
+      "tipoLocal": "Residencial",
+      "ports": 2,
+      "hostId": "host2",
+      "conector": "Tipo 1",
+      "potencia": 50,
+      "preco": 3.1,
+      "days": [
+        "Seg",
+        "Ter",
+        "Qua",
+        "Qui",
+        "Sex"
+      ],
+      "open": "08:00",
+      "close": "22:00",
+      "active": true
+    }
+  ],
+  "vehicles": [
+    {
+      "id": "veh1",
+      "userId": null,
+      "modelo": "Picape Hummer",
+      "placa": "ABC-1234",
+      "conector": "CC",
+      "kwh": 210,
+      "createdAt": "01/01/2025",
+      "updatedAt": "01/01/2025"
+    },
+    {
+      "id": "nq0q9m6",
+      "userId": "enxsvc7",
+      "modelo": "TIGGO 8",
+      "placa": "ARF1S23",
+      "conector": "Tipo 1",
+      "kwh": 70,
+      "createdAt": "04/11/2025",
+      "updatedAt": "04/11/2025, 18:49:09"
+    },
+    {
+      "id": "2zzqpxm",
+      "userId": "enxsvc7",
+      "modelo": "BYD Song",
+      "placa": "PPP-1236",
+      "conector": "Tipo 2",
+      "kwh": 72,
+      "createdAt": "04/11/2025",
+      "updatedAt": "04/11/2025, 18:50:19"
+    }
+  ],
+  "sessions": [
+    {
+      "id": "sess1",
+      "number": 1,
+      "userId": "driver1",
+      "stationId": "st2",
+      "vehicleId": "veh1",
+      "connectorIndex": 1,
+      "currentCharge": 0,
+      "targetCharge": 1,
+      "energyNeeded": 0.66,
+      "estimatedTime": 1,
+      "pricePerKwh": 2.9,
+      "prepaidAmount": 1.91,
+      "fromReservation": true,
+      "iniTs": 0,
+      "endTs": 1762293383223,
+      "status": "encerrada",
+      "energyDelivered": 0.72,
+      "actualCost": 1.8719999999999999,
+      "cashbackGenerated": 0.038000000000000034,
+      "finalChargeLevel": 1,
+      "duration": 3
+    },
+    {
+      "id": "4a0rbzr",
+      "number": 44,
+      "userId": "enxsvc7",
+      "stationId": "st1",
+      "vehicleId": "2zzqpxm",
+      "connectorIndex": 1,
+      "currentCharge": 0,
+      "targetCharge": 1,
+      "energyNeeded": 0.72,
+      "estimatedTime": 3,
+      "pricePerKwh": 2.6,
+      "prepaidAmount": 1.87,
+      "fromReservation": false,
+      "iniTs": 1762293198376,
+      "endTs": 1762293383203,
+      "status": "encerrada",
+      "energyDelivered": 0.72,
+      "actualCost": 1.8719999999999999,
+      "duration": 3
+    }
+  ],
+  "reservations": [
+    {
+      "id": "res1",
+      "userId": "driver1",
+      "stationId": "st2",
+      "vehicleId": "veh1",
+      "startTs": 0,
+      "endTs": 0,
+      "durationMin": 60,
+      "prepaidAmount": 1.91,
+      "status": "cancelada",
+      "createdAt": "2025-11-04T00:00:00Z",
+      "currentCharge": 0,
+      "targetCharge": 1,
+      "sessionNumber": null,
+      "cancelledAt": 1762292909303,
+      "startedAt": null
+    }
+  ],
+  "history": [
+    {
+      "id": "hist1",
+      "userId": "driver1",
+      "transactionId": "TRX00000001",
+      "sessionId": "sess1",
+      "sessionNumber": 1,
+      "date": "04/11/2025",
+      "startTime": "17:25",
+      "endTime": "17:26",
+      "duration": "1 min",
+      "stationId": "st2",
+      "stationName": "Posto Aero",
+      "vehicleId": "veh1",
+      "vehicleName": "Picape Hummer • ABC-1234",
+      "energyKwh": "0,66 kWh",
+      "initialCharge": "0%",
+      "finalCharge": "1%",
+      "chargeIncrease": "+1%",
+      "rate": "R$ 2,90/kWh",
+      "totalCost": "R$ 1,91",
+      "paymentMethod": "Cartão de Crédito",
+      "cardLastDigits": "4444",
+      "cardName": "Cartão Padrão",
+      "paymentDate": "04/11/2025",
+      "paymentTime": "17:26",
+      "timestamp": 0
+    },
+    {
+      "id": "wsijuy7",
+      "userId": "enxsvc7",
+      "sessionId": "4a0rbzr",
+      "sessionNumber": 44,
+      "date": "04/11/2025",
+      "startTime": "18:53",
+      "endTime": "18:56",
+      "duration": "3 min",
+      "stationId": "st1",
+      "stationName": "Shopping Atlântico",
+      "vehicleId": "2zzqpxm",
+      "vehicleName": "BYD Song • PPP-1236",
+      "energyKwh": "0.72 kWh",
+      "initialCharge": "0.0%",
+      "finalCharge": "1.0%",
+      "chargeIncrease": "1.0%",
+      "rate": "R$ 2.60/kWh",
+      "totalCost": "R$ 1.87",
+      "paymentMethod": "-",
+      "cardLastDigits": "",
+      "cardName": "",
+      "paymentDate": "04/11/2025",
+      "paymentTime": "18:56",
+      "timestamp": 1762293383203
+    },
+    {
+      "id": "kmjpvs2",
+      "userId": "enxsvc7",
+      "sessionId": "sess1",
+      "sessionNumber": 1,
+      "date": "04/11/2025",
+      "startTime": "18:53",
+      "endTime": "18:56",
+      "duration": "3 min",
+      "stationId": "st2",
+      "stationName": "Shopping Atlântico • Conector 1 • Sessão #44",
+      "vehicleId": "veh1",
+      "vehicleName": "BYD Song • PPP-1236",
+      "energyKwh": "0.72 kWh",
+      "initialCharge": "0.0%",
+      "finalCharge": "1.0%",
+      "chargeIncrease": "+1.0%",
+      "rate": "R$ 2,90/kWh",
+      "totalCost": "R$ 1,87",
+      "paymentMethod": "-",
+      "cardLastDigits": "",
+      "cardName": "",
+      "paymentDate": "04/11/2025",
+      "paymentTime": "18:56",
+      "timestamp": 1762293383254
+    },
+    {
+      "id": "wsijuy7",
+      "userId": "enxsvc7",
+      "sessionId": "4a0rbzr",
+      "sessionNumber": 44,
+      "date": "04/11/2025",
+      "startTime": "18:53",
+      "endTime": "18:56",
+      "duration": "3 min",
+      "stationId": "st1",
+      "stationName": "Shopping Atlântico",
+      "vehicleId": "2zzqpxm",
+      "vehicleName": "BYD Song • PPP-1236",
+      "energyKwh": "0.72 kWh",
+      "initialCharge": "0.0%",
+      "finalCharge": "1.0%",
+      "chargeIncrease": "1.0%",
+      "rate": "R$ 2.60/kWh",
+      "totalCost": "R$ 1.87",
+      "paymentMethod": "-",
+      "cardLastDigits": "",
+      "cardName": "",
+      "paymentDate": "04/11/2025",
+      "paymentTime": "18:56",
+      "timestamp": 1762293383203
+    },
+    {
+      "id": "kmjpvs2",
+      "userId": "enxsvc7",
+      "sessionId": "sess1",
+      "sessionNumber": 1,
+      "date": "04/11/2025",
+      "startTime": "18:53",
+      "endTime": "18:56",
+      "duration": "3 min",
+      "stationId": "st2",
+      "stationName": "Shopping Atlântico • Conector 1 • Sessão #44",
+      "vehicleId": "veh1",
+      "vehicleName": "BYD Song • PPP-1236",
+      "energyKwh": "0.72 kWh",
+      "initialCharge": "0.0%",
+      "finalCharge": "1.0%",
+      "chargeIncrease": "+1.0%",
+      "rate": "R$ 2,90/kWh",
+      "totalCost": "R$ 1,87",
+      "paymentMethod": "-",
+      "cardLastDigits": "",
+      "cardName": "",
+      "paymentDate": "04/11/2025",
+      "paymentTime": "18:56",
+      "timestamp": 1762293383254
+    }
+  ],
+  "cashback": [
+    {
+      "userId": null,
+      "balance": 0,
+      "id": "d82b"
+    }
+  ],
+  "savedCards": [
+    {
+      "id": "card1",
+      "userId": null,
+      "cardName": "Cartão Padrão",
+      "lastDigits": "4444",
+      "expiry": "10/28"
+    }
+  ]
+}
