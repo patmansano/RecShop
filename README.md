@@ -139,9 +139,9 @@ syncLocalToApi()
 ```
 
 ## Credenciais de exemplo
-- Admin: `admin@recshop.com` / `admin123`
-- Host:  `host1@recshop.com` / `host123`
-- Driver: `maria@email.com` / `123456`
+- Admin: `adm@gmail.com` / `123456`
+- Host:  `host2@recshop.com` / `host123`
+- Driver: `tom@email.com` / `795869`
 
 ## Dicas
 - Formato de moeda: todo o app usa `formatBRL(n)` (R$ X,XX).
@@ -155,5 +155,6 @@ syncLocalToApi()
 
 ---
 © 2025 – Projeto acadêmico PSW/RECSHOP.
+
 
 
