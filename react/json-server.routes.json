@@ -1,0 +1,9 @@
+{
+  "/users/:id/vehicles": "/vehicles?userId=:id",
+  "/users/:id/cards": "/cards?userId=:id",
+  "/users/:id/history": "/history?userId=:id",
+  "/users/:id/wallet": "/wallets?userId=:id",
+  "/buscar": "/stations",
+  "/buscar/search": "/stations"
+}
+

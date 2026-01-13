@@ -1,0 +1,88 @@
+:root{
+  --rec-blue:#0A74FF; --rec-purple:#7B3FE4; --rec-green:#00C389;
+  --rec-dark:#0D1321; --rec-bg:#F5F9FF;
+  --rec-grad:linear-gradient(90deg,#0A74FF 0%, #7B3FE4 55%, #00C389 100%);
+  --bs-body-font-family:'Inter',system-ui,-apple-system,Segoe UI,Roboto,Ubuntu,'Helvetica Neue',Arial,'Noto Sans',sans-serif;
+  --bs-primary: var(--rec-blue); --bs-success: var(--rec-green);
+}
+body[data-bs-theme="light"]{ background: var(--rec-bg); }
+.route{display:none}.route.active{display:block}
+.navbar-brand img{ height:40px; border-radius:6px; }
+.rec-hero{ background:var(--rec-grad); color:#fff; border-radius:16px; padding:18px 20px; box-shadow:0 6px 22px rgba(10,116,255,.18);}
+.btn-rec{ background:var(--rec-grad); color:#fff; border:0; box-shadow:0 4px 12px rgba(10,116,255,.25);}
+.btn-rec:hover{ filter:saturate(1.08) brightness(.98); }
+.btn-rec-outline{ border:2px solid var(--rec-green); color:var(--rec-dark); background:transparent;}
+.btn-rec-outline:hover{ background:rgba(0,195,137,.08); }
+.nav-pills .nav-link.active{ background:var(--rec-grad); color:#fff; box-shadow:0 4px 12px rgba(10,116,255,.25);}
+.card{ border:1px solid rgba(13,19,33,.06); border-radius:14px; }
+.badge-rec{ background:rgba(10,116,255,.12); color:#0A74FF; }
+.price{ color:var(--rec-green); font-weight:700; }
+.brand-title{ font-weight:700; letter-spacing:.2px; }
+.small-muted{ color:#6b7280; }
+.hero-banner{ position:relative; border-radius:20px; overflow:hidden; box-shadow:0 8px 32px rgba(10,116,255,.2); }
+.hero-banner img{ width:100%; height:auto; object-fit:cover; max-height:400px; }
+.hero-overlay{ position:absolute; bottom:0; left:0; right:0; background:linear-gradient(to top, rgba(13,19,33,.95) 0%, rgba(13,19,33,.7) 50%, transparent 100%); padding:30px; color:#fff; }
+.logo-display{ height:100px; object-fit:contain; border-radius:12px; }
+
+/* Compact tables for admin screens */
+.table-compact th,
+.table-compact td{
+  padding: .35rem .5rem;
+  font-size: .85rem;
+  vertical-align: middle;
+}
+.cell-nowrap{ white-space: nowrap; }
+.cell-address{
+  white-space: pre-wrap;
+  max-width: 280px;
+}
+.cell-small{ font-size: .8125rem; }
+.cell-wrap{ white-space: normal; }
+
+/* Gradient headers with toggle */
+.bar-gradient{
+  background: var(--rec-grad);
+  color: #fff;
+  border-bottom: none;
+}
+.wide-table{ min-width: 1400px; }
+.bar-gradient .btn-header-toggle{
+  color:#fff;
+  background: transparent;
+  border: 0;
+  box-shadow: none;
+}
+
+/* Estacoes table header center */
+.table-estacoes thead th{
+  text-align: center;
+  vertical-align: middle;
+}
+.bar-gradient .btn-header-toggle:hover{
+  filter: brightness(0.95);
+}
+
+/* Pill title bar */
+.pill-bar{
+  background: var(--rec-grad);
+  color:#fff;
+  border-radius: 999px;
+  padding: 6px 14px;
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+  box-shadow: 0 4px 14px rgba(10,116,255,.22);
+}
+.pill-dot{
+  width:10px;height:10px;border-radius:50%;background:#00C389; display:inline-block;
+}
+
+/* Map container */
+.map-card{ height: 380px; }
+.map-card #stationsMap{ height: 100%; width: 100%; border-radius: 12px; }
+
+.card-selected{
+  border: 2px solid var(--rec-blue) !important;
+  box-shadow: 0 0 0 2px rgba(10,116,255,.12);
+}
+

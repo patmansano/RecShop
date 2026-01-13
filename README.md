@@ -1,3 +1,128 @@
+# RECSHOP (Vite + React + Express + MongoDB)
+
+Aplicação de gestão de recargas com frontend em React (Vite) e backend em Express + MongoDB (Mongoose). Autenticação com JWT, seed inicial e integração de API habilitada no frontend por variáveis de ambiente.
+
+## Estrutura
+
+```
+.
+├── api/                 # Backend (Express + MongoDB)
+│   ├── src/
+│   │   ├── server.js    # Servidor e rotas
+│   │   ├── models.js    # Esquemas Mongoose
+│   │   ├── auth.js      # JWT (sign/verify, middlewares)
+│   │   └── seed.js      # Seed inicial (users, vehicles, stations, history...)
+│   ├── package.json
+│   └── README.md
+└── react/               # Frontend (Vite + React)
+    ├── src/
+    ├── index.html
+    ├── package.json
+    └── .env (criar)
+```
+
+## 1) Backend (API)
+
+Pré‑requisitos: Node 18+ e MongoDB local (ou Atlas). Veja duas opções de banco:
+
+- Opção A (local): instalar MongoDB Community + Compass. Crie `.env` em `api/` com:
+  ```env
+  MONGO_URI=mongodb://127.0.0.1:27017/recshop
+  PORT=3000
+  JWT_SECRET=uma-chave-segura
+  JWT_EXPIRES=7d
+  ```
+
+- Opção B (Atlas): crie um cluster gratuito M0, libere seu IP em Network Access e crie um Database User. Use a connection string no `.env` de `api/`:
+  ```env
+  MONGO_URI=mongodb+srv://USUARIO:SENHA@CLUSTER-ID.mongodb.net/recshop?retryWrites=true&w=majority
+  PORT=3000
+  JWT_SECRET=uma-chave-segura
+  JWT_EXPIRES=7d
+  ```
+
+Instalação e execução:
+
+```bash
+cd api
+npm install
+# (opcional) popular o banco com dados de demo
+node src/seed.js
+# iniciar a API
+npm run dev
+# esperado: "MongoDB connected" e "API listening on http://localhost:3000"
+```
+
+Endpoints principais (compatíveis com o frontend):
+- Auth: `POST /auth/login` (email, password) → user + token
+- Users: `POST /users`, `PATCH /users/:id`, `GET /users`
+- Wallets: `GET /wallets?userId`, `POST /wallets`, `PATCH /wallets/:id`
+- Cards: `GET /cards?userId`, `POST /cards`, `PATCH /cards/:id`, `DELETE /cards/:id`
+- Banks: `GET /banks?userId`, `POST /banks`, `PATCH /banks/:id`, `DELETE /banks/:id`
+- Vehicles: `GET /vehicles?userId`, `GET /vehicles`, `POST /vehicles`, `PATCH /vehicles/:id`, `DELETE /vehicles/:id`
+- Stations: `GET /stations`, `POST /stations`, `PATCH /stations/:id`, `DELETE /stations/:id`
+- History: `GET /history?userId`, `POST /history`
+
+Observação: operações sensíveis usam JWT (Authorization: `Bearer <token>`).
+
+## 2) Frontend (Vite + React)
+
+Crie o arquivo `.env` na pasta `react/`:
+
+```env
+VITE_USE_API=true
+VITE_API_BASE=http://localhost:3000
+```
+
+Instale e inicie:
+
+```bash
+cd react
+npm install
+npm run dev
+# acesse http://localhost:5173/
+```
+
+### Usuários do seed (demo)
+
+- Driver: `maria@email.com` / `123456`
+- Host: `host1@recshop.com` / `host123`
+- Admin: `admin@recshop.com` / `admin123`
+
+## 3) Push para o GitHub
+
+Crie um repositório vazio no GitHub e execute na raiz do projeto (mesmo nível de `api/` e `react/`):
+
+```bash
+git init
+git add .
+git commit -m "RECSHOP: frontend React + backend Express/MongoDB"
+git branch -M main
+git remote add origin https://github.com/<SEU_USUARIO>/<NOME_DO_REPO>.git
+git push -u origin main
+```
+
+Se estiver publicando pela primeira vez, configure seu usuário:
+
+```bash
+git config --global user.name "Seu Nome"
+git config --global user.email "seu-email@exemplo.com"
+```
+
+## 4) Dicas e problemas comuns
+
+- PowerShell bloqueando `npm`:
+  - Execute `Set-ExecutionPolicy -Scope Process -ExecutionPolicy Bypass` ou use `npm.cmd`.
+- Token expirado (401):
+  - O frontend faz logout automático; basta logar novamente.
+- MongoDB local:
+  - Garanta que o serviço “MongoDB” está “Em execução” (services.msc) e use `127.0.0.1` na `MONGO_URI`.
+- Atlas:
+  - Adicione seu IP em “Network Access” e garanta que usuário/senha estão corretos (atenção ao URL-encoding da senha).
+
+---
+
+Pronto! Com API (porta 3000) e Vite (porta 5173) no ar, o app estará funcionando e persistindo no banco. Se desejar, podemos adicionar scripts para subir API e frontend juntos, CI/CD ou Docker Compose.*** End Patch
 # RECSHOP – Sessão de Recarga (Projeto)
 
 Aplicação front‑end (HTML + JS) para buscar estações de recarga, criar/gerenciar sessões e reservas, com persistência via Redux‑lite + json-server.

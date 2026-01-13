@@ -1,0 +1,47 @@
+{
+  "users": [
+    {
+      "id": "u1",
+      "nome": "Maria",
+      "email": "maria@email.com",
+      "role": "driver",
+      "password": "123456"
+    },
+    {
+      "id": "h1",
+      "nome": "Host 1",
+      "email": "host1@recshop.com",
+      "role": "host",
+      "password": "host123"
+    },
+    {
+      "id": "a1",
+      "nome": "Admin",
+      "email": "admin@recshop.com",
+      "role": "admin",
+      "password": "admin123"
+    }
+  ],
+  "vehicles": [
+    {
+      "id": "v1",
+      "userId": "u1",
+      "nome": "TIGGO 8",
+      "placa": "ARF1S23",
+      "conector": "Tipo 1",
+      "bateriaKwh": 70,
+      "createdAt": "2025-11-04T21:49:09.000Z",
+      "updatedAt": "2025-11-04T21:49:09.000Z"
+    },
+    {
+      "id": "v2",
+      "userId": "u1",
+      "nome": "BYD Song",
+      "placa": "PPP-1236",
+      "conector": "Tipo 2",
+      "bateriaKwh": 72,
+      "createdAt": "2025-11-04T21:50:19.000Z",
+      "updatedAt": "2025-11-04T21:50:19.000Z"
+    }
+  ]
+}

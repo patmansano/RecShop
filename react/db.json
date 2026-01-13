@@ -1,0 +1,702 @@
+{
+  "users": [
+    {
+      "id": "u1",
+      "nome": "Maria",
+      "email": "maria@email.com",
+      "role": "driver",
+      "password": "123456",
+      "cpfCnpj": "086.152.624-46",
+      "updatedAt": "2026-01-13T17:25:47.688Z",
+      "isActive": true
+    },
+    {
+      "id": "u2",
+      "nome": "Joao",
+      "email": "joao@email.com",
+      "role": "driver",
+      "password": "789123",
+      "cpfCnpj": "623.177.090-72",
+      "updatedAt": "2026-01-13T17:32:32.455Z",
+      "isActive": true
+    },
+    {
+      "id": "h1",
+      "nome": "Host 1",
+      "email": "host1@recshop.com",
+      "role": "host",
+      "password": "host123",
+      "cpfCnpj": "47.513.424/0001-13",
+      "updatedAt": "2026-01-13T17:25:28.981Z",
+      "isActive": true
+    },
+    {
+      "id": "h2",
+      "nome": "Host 2",
+      "email": "host2@recshop.com",
+      "role": "host",
+      "password": "host456",
+      "cpfCnpj": "335.958.756-13",
+      "updatedAt": "2026-01-13T17:26:46.945Z",
+      "isActive": true
+    },
+    {
+      "id": "a1",
+      "nome": "Admin",
+      "email": "admin@recshop.com",
+      "role": "admin",
+      "password": "admin123",
+      "isActive": true
+    }
+  ],
+  "vehicles": [
+    {
+      "id": "v1",
+      "userId": "u1",
+      "nome": "TIGGO 8",
+      "placa": "ARF1S23",
+      "conector": "Tipo 1",
+      "bateriaKwh": 70,
+      "createdAt": "2025-11-04T21:49:09.000Z",
+      "updatedAt": "2025-11-04T21:49:09.000Z"
+    },
+    {
+      "id": "v2",
+      "userId": "u1",
+      "nome": "BYD Song",
+      "placa": "PPP-1236",
+      "conector": "Tipo 2",
+      "bateriaKwh": 72,
+      "createdAt": "2025-11-04T21:50:19.000Z",
+      "updatedAt": "2025-11-04T21:50:19.000Z"
+    },
+    {
+      "id": "v3",
+      "userId": "u2",
+      "nome": "Renault Zoe",
+      "placa": "HST-4455",
+      "conector": "Tipo 2",
+      "bateriaKwh": 52,
+      "createdAt": "2025-11-04T21:55:00.000Z",
+      "updatedAt": "2025-11-04T21:55:00.000Z"
+    },
+    {
+      "id": "v4",
+      "userId": "u2",
+      "nome": "Nissan Leaf",
+      "placa": "HST-8899",
+      "conector": "GB/T(CA)",
+      "bateriaKwh": 40,
+      "createdAt": "2025-11-04T21:56:00.000Z",
+      "updatedAt": "2025-11-04T21:56:00.000Z"
+    },
+    {
+      "id": "v5",
+      "userId": "a1",
+      "nome": "Tesla Model 3",
+      "placa": "ADM-2026",
+      "conector": "CC",
+      "bateriaKwh": 75,
+      "createdAt": "2025-11-04T21:57:00.000Z",
+      "updatedAt": "2025-11-04T21:57:00.000Z"
+    },
+    {
+      "id": "v6",
+      "userId": "a1",
+      "nome": "Chevrolet Bolt",
+      "placa": "ADM-3344",
+      "conector": "Tipo 1",
+      "bateriaKwh": 66,
+      "createdAt": "2025-11-04T22:01:00.000Z",
+      "updatedAt": "2025-11-04T22:01:00.000Z"
+    },
+    {
+      "id": "v7",
+      "userId": "a1",
+      "nome": "VW ID.4",
+      "placa": "ADM-7788",
+      "conector": "Tipo 2",
+      "bateriaKwh": 77,
+      "createdAt": "2025-11-04T22:02:00.000Z",
+      "updatedAt": "2025-11-04T22:02:00.000Z"
+    },
+    {
+      "id": "v8",
+      "userId": "u1",
+      "nome": "BYD Dolphin",
+      "placa": "HST2-2211",
+      "conector": "Tipo 2",
+      "bateriaKwh": 44,
+      "createdAt": "2025-11-04T22:05:00.000Z",
+      "updatedAt": "2025-11-04T22:05:00.000Z"
+    },
+    {
+      "id": "v9",
+      "userId": "u2",
+      "nome": "JAC E-JS4",
+      "placa": "HST2-8890",
+      "conector": "CC",
+      "bateriaKwh": 65,
+      "createdAt": "2025-11-04T22:06:00.000Z",
+      "updatedAt": "2025-11-04T22:06:00.000Z"
+    },
+    {
+      "userId": "a1",
+      "nome": "Peugeot e-2008",
+      "marca": "Peugeot",
+      "modelo": "e-2008",
+      "placa": "KTM5789",
+      "conector": "GB/T(CA)",
+      "bateriaKwh": 120,
+      "createdAt": "2026-01-13T19:27:03.240Z",
+      "updatedAt": "2026-01-13T19:27:03.240Z",
+      "id": "WM19_4F"
+    }
+  ],
+  "cards": [
+    {
+      "userId": "u1",
+      "numberMasked": "**** **** **** 6666",
+      "brand": "Elo",
+      "holder": "Maria Silva",
+      "exp": "10/29",
+      "billing": {
+        "street": "Rua José Siqueira",
+        "number": "",
+        "complement": "",
+        "district": "Alcântara",
+        "city": "São Gonçalo",
+        "uf": "RJ",
+        "cep": "24711100"
+      },
+      "id": "RQ50d4T"
+    },
+    {
+      "userId": "u2",
+      "numberMasked": "**** **** **** 9666",
+      "brand": "Visa",
+      "holder": "João Costa",
+      "exp": "09/28",
+      "billing": {
+        "street": "",
+        "number": "",
+        "complement": "",
+        "district": "",
+        "city": "",
+        "uf": "",
+        "cep": "2203"
+      },
+      "id": "1B06Rug"
+    }
+  ],
+  "wallets": [
+    {
+      "id": "w1",
+      "userId": "u1",
+      "saldo": 50
+    },
+    {
+      "id": "w2",
+      "userId": "h1",
+      "saldo": 0
+    },
+    {
+      "id": "w3",
+      "userId": "a1",
+      "saldo": 0
+    }
+  ],
+  "history": [
+    {
+      "id": "h1",
+      "userId": "u1",
+      "stationName": "Shopping Atlântico",
+      "total": 38.9,
+      "data": "2025-11-04T21:13:20.000Z"
+    },
+    {
+      "id": "h2",
+      "userId": "u1",
+      "stationName": "Posto Aero",
+      "total": 22.4,
+      "data": "2025-11-04T20:50:19.000Z"
+    },
+    {
+      "userId": "a1",
+      "data": "2026-01-13T14:56:04.965Z",
+      "stationId": "s1",
+      "stationName": "Shopping Atlântico",
+      "total": 26,
+      "kind": "sessao",
+      "id": "4yQDW8o"
+    },
+    {
+      "userId": "a1",
+      "data": "2026-01-13T14:56:05.060Z",
+      "stationId": "s1",
+      "stationName": "Shopping Atlântico",
+      "total": 26,
+      "kind": "sessao",
+      "id": "-uKxjtg"
+    },
+    {
+      "userId": "a1",
+      "data": "2026-01-13T14:56:06.246Z",
+      "stationId": "s1",
+      "stationName": "Shopping Atlântico",
+      "total": 26,
+      "kind": "sessao",
+      "id": "xEEvDS4"
+    },
+    {
+      "userId": "a1",
+      "data": "2026-01-13T14:56:06.359Z",
+      "stationId": "s1",
+      "stationName": "Shopping Atlântico",
+      "total": 26,
+      "kind": "sessao",
+      "id": "9gUhqes"
+    },
+    {
+      "userId": "a1",
+      "data": "2026-01-13T14:56:06.965Z",
+      "stationId": "s1",
+      "stationName": "Shopping Atlântico",
+      "total": 0,
+      "kind": "reserva",
+      "id": "XOMdQeS"
+    },
+    {
+      "userId": "a1",
+      "data": "2026-01-13T14:56:07.063Z",
+      "stationId": "s1",
+      "stationName": "Shopping Atlântico",
+      "total": 0,
+      "kind": "reserva",
+      "id": "j_9eh3Z"
+    },
+    {
+      "userId": "a1",
+      "data": "2026-01-13T14:59:11.392Z",
+      "stationId": "s2",
+      "stationName": "Posto Aero",
+      "total": 29,
+      "kind": "sessao",
+      "id": "3oHxNHG"
+    },
+    {
+      "userId": "a1",
+      "data": "2026-01-13T14:59:11.488Z",
+      "stationId": "s2",
+      "stationName": "Posto Aero",
+      "total": 29,
+      "kind": "sessao",
+      "id": "859uZXa"
+    },
+    {
+      "userId": "a1",
+      "data": "2026-01-13T14:59:19.992Z",
+      "stationId": "s2",
+      "stationName": "Posto Aero",
+      "total": 29,
+      "kind": "sessao",
+      "id": "yKsf5vP"
+    },
+    {
+      "userId": "a1",
+      "data": "2026-01-13T14:59:20.113Z",
+      "stationId": "s2",
+      "stationName": "Posto Aero",
+      "total": 29,
+      "kind": "sessao",
+      "id": "crM91mG"
+    },
+    {
+      "userId": "a1",
+      "data": "2026-01-13T15:11:16.478Z",
+      "stationId": "s2",
+      "stationName": "Posto Aero",
+      "total": 29,
+      "kind": "sessao",
+      "id": "Eljs41A"
+    },
+    {
+      "userId": "a1",
+      "data": "2026-01-13T15:16:55.965Z",
+      "stationId": "s2",
+      "stationName": "Posto Aero",
+      "total": 29,
+      "kind": "sessao",
+      "id": "SXX4FLR"
+    },
+    {
+      "userId": "a1",
+      "data": "2026-01-13T15:36:01.377Z",
+      "stationId": "s1",
+      "stationName": "Shopping Atlântico",
+      "total": 1.9500000000000002,
+      "kind": "sessao",
+      "id": "HDRLZqR"
+    },
+    {
+      "userId": "a1",
+      "data": "2026-01-13T15:38:19.406Z",
+      "stationId": "s1",
+      "stationName": "Shopping Atlântico",
+      "total": 3.4320000000000004,
+      "kind": "sessao",
+      "id": "cPGUEJt"
+    },
+    {
+      "userId": "a1",
+      "data": "2026-01-13T15:38:50.801Z",
+      "stationId": "s1",
+      "stationName": "Shopping Atlântico",
+      "total": 2.0020000000000002,
+      "kind": "sessao",
+      "id": "GKp3m8t"
+    },
+    {
+      "userId": "a1",
+      "data": "2026-01-13T15:39:09.026Z",
+      "stationId": "s1",
+      "stationName": "Shopping Atlântico",
+      "total": 156,
+      "kind": "sessao",
+      "id": "5sHR8RI"
+    },
+    {
+      "userId": "a1",
+      "data": "2026-01-13T15:49:08.659Z",
+      "stationId": "s1",
+      "stationName": "Shopping Atlântico",
+      "total": 0,
+      "kind": "reserva",
+      "id": "g8fvIqX"
+    },
+    {
+      "userId": "a1",
+      "data": "2026-01-13T15:49:08.779Z",
+      "stationId": "s1",
+      "stationName": "Shopping Atlântico",
+      "total": 0,
+      "kind": "reserva",
+      "id": "fR1lqjo"
+    },
+    {
+      "userId": "a1",
+      "data": "2026-01-13T15:54:11.427Z",
+      "stationId": "s1",
+      "stationName": "Shopping Atlântico",
+      "vehicleName": null,
+      "startAt": "2026-01-13T15:36:01.883Z",
+      "endAt": "2026-01-13T15:54:11.427Z",
+      "total": 1.95,
+      "kind": "recarga",
+      "id": "kDfYeEm"
+    },
+    {
+      "userId": "a1",
+      "data": "2026-01-13T15:54:11.531Z",
+      "stationId": "s1",
+      "stationName": "Shopping Atlântico",
+      "vehicleName": null,
+      "startAt": "2026-01-13T15:36:01.883Z",
+      "endAt": "2026-01-13T15:54:11.531Z",
+      "total": 1.95,
+      "kind": "recarga",
+      "id": "EwN6UsH"
+    },
+    {
+      "userId": "a1",
+      "data": "2026-01-13T15:54:16.189Z",
+      "stationId": "s1",
+      "stationName": "Shopping Atlântico",
+      "vehicleName": null,
+      "startAt": "2026-01-13T15:38:19.916Z",
+      "endAt": "2026-01-13T15:54:16.189Z",
+      "total": 3.43,
+      "kind": "recarga",
+      "id": "KICfAsj"
+    },
+    {
+      "userId": "a1",
+      "data": "2026-01-13T15:54:16.288Z",
+      "stationId": "s1",
+      "stationName": "Shopping Atlântico",
+      "vehicleName": null,
+      "startAt": "2026-01-13T15:38:19.916Z",
+      "endAt": "2026-01-13T15:54:16.288Z",
+      "total": 3.43,
+      "kind": "recarga",
+      "id": "OkgErhi"
+    },
+    {
+      "userId": "a1",
+      "data": "2026-01-13T15:54:21.597Z",
+      "stationId": "s1",
+      "stationName": "Shopping Atlântico",
+      "vehicleName": null,
+      "startAt": "2026-01-13T15:38:51.292Z",
+      "endAt": "2026-01-13T15:54:21.597Z",
+      "total": 2,
+      "kind": "recarga",
+      "id": "Gm2tnB2"
+    },
+    {
+      "userId": "a1",
+      "data": "2026-01-13T16:16:53.451Z",
+      "stationId": "s1",
+      "stationName": "Shopping Atlântico",
+      "total": 1.9500000000000002,
+      "kind": "sessao",
+      "id": "VA6Ul1H"
+    },
+    {
+      "userId": "a1",
+      "data": "2026-01-13T16:22:10.888Z",
+      "chargeId": 1,
+      "stationId": "s1",
+      "stationName": "Shopping Atlântico",
+      "vehicleName": "Tesla Model 3 • ADM-2026",
+      "startAt": "2026-01-13T16:16:53.981Z",
+      "endAt": "2026-01-13T16:22:10.888Z",
+      "total": 1.95,
+      "kind": "recarga",
+      "id": "oQu4nVj"
+    },
+    {
+      "userId": "a1",
+      "data": "2026-01-13T16:28:02.299Z",
+      "stationId": "s1",
+      "stationName": "Shopping Atlântico",
+      "total": 5.8500000000000005,
+      "kind": "sessao",
+      "id": "AhaRtOP"
+    },
+    {
+      "userId": "a1",
+      "data": "2026-01-13T16:29:01.871Z",
+      "chargeId": 2,
+      "stationId": "s1",
+      "stationName": "Shopping Atlântico",
+      "vehicleName": "Tesla Model 3 • ADM-2026",
+      "startAt": "2026-01-13T16:28:02.819Z",
+      "endAt": "2026-01-13T16:34:02.819Z",
+      "total": 0.95,
+      "refund": 4.9,
+      "status": "cancelada",
+      "kind": "recarga",
+      "id": "_1ewnCT"
+    },
+    {
+      "userId": "a1",
+      "data": "2026-01-13T17:41:53.668Z",
+      "stationId": "s2",
+      "stationName": "Posto Aero",
+      "total": 2.233,
+      "kind": "sessao",
+      "id": "bZgkHau"
+    },
+    {
+      "userId": "a1",
+      "data": "2026-01-13T17:49:59.630Z",
+      "chargeId": 3,
+      "stationId": "s2",
+      "stationName": "Posto Aero",
+      "vehicleName": "VW ID.4 • ADM-7788",
+      "startAt": "2026-01-13T17:41:54.669Z",
+      "endAt": "2026-01-13T17:49:59.630Z",
+      "total": 2.23,
+      "kind": "recarga",
+      "id": "Ac8nVxj"
+    },
+    {
+      "userId": "a1",
+      "data": "2026-01-13T17:56:16.414Z",
+      "stationId": "s1",
+      "stationName": "Shopping Atlântico",
+      "total": 0,
+      "when": "2026-01-13T18:00:00.000Z",
+      "kind": "reserva",
+      "id": "v0RG3AE"
+    },
+    {
+      "userId": "a1",
+      "data": "2026-01-13T18:26:47.470Z",
+      "chargeId": 4,
+      "stationId": "s1",
+      "stationName": "Shopping Atlântico",
+      "vehicleName": null,
+      "startAt": "2026-01-13T18:21:11.985Z",
+      "endAt": "2026-01-13T18:35:11.985Z",
+      "total": 5.19,
+      "kind": "recarga",
+      "id": "WZl9Bf8"
+    },
+    {
+      "userId": "a1",
+      "data": "2026-01-13T18:33:33.760Z",
+      "chargeId": 5,
+      "stationId": "s1",
+      "stationName": "Shopping Atlântico",
+      "vehicleName": "Tesla Model 3 • ADM-2026",
+      "startAt": "2026-01-13T18:33:00.000Z",
+      "endAt": null,
+      "total": 156,
+      "kwh": 60,
+      "status": "reserva",
+      "kind": "reserva",
+      "id": "jnIMuhG"
+    },
+    {
+      "userId": "a1",
+      "data": "2026-01-13T18:37:53.388Z",
+      "chargeId": 6,
+      "stationId": "s1",
+      "stationName": "Shopping Atlântico",
+      "vehicleName": "Tesla Model 3 • ADM-2026",
+      "startAt": "2026-01-13T18:39:00.000Z",
+      "endAt": null,
+      "total": 0.39,
+      "mode": "Parcial",
+      "targetPct": 0.2,
+      "chargePct": 0,
+      "kwh": 0.15,
+      "status": "reserva",
+      "kind": "reserva",
+      "id": "JFT4Ni4"
+    },
+    {
+      "userId": "a1",
+      "data": "2026-01-13T18:38:11.989Z",
+      "chargeId": 5,
+      "stationId": "s1",
+      "stationName": "Shopping Atlântico",
+      "vehicleName": null,
+      "startAt": "2026-01-13T18:33:43.999Z",
+      "endAt": "2026-01-13T21:17:43.999Z",
+      "total": 4.25,
+      "mode": "Agendada",
+      "targetPct": null,
+      "kind": "recarga",
+      "id": "WXKOUet"
+    },
+    {
+      "userId": "a1",
+      "data": "2026-01-13T18:44:32.727Z",
+      "chargeId": 6,
+      "stationId": "s1",
+      "stationName": "Shopping Atlântico",
+      "vehicleName": "Tesla Model 3 • ADM-2026",
+      "startAt": "2026-01-13T18:39:02.022Z",
+      "endAt": "2026-01-13T18:44:32.726Z",
+      "total": 0.39,
+      "mode": "Parcial",
+      "targetPct": 0.2,
+      "kind": "recarga",
+      "id": "3sctFfn"
+    }
+  ],
+  "stations": [
+    {
+      "id": "s1",
+      "userId": "a1",
+      "nome": "Shopping Atlântico",
+      "acessoType": "Comercial",
+      "endereco": "Av. Atlântica, 100",
+      "qtdDisponivel": 4,
+      "qtdTotal": 4,
+      "connectorType": "Tipo 2",
+      "tipo": "AC",
+      "potenciaKw": 22,
+      "precoKwh": 2.6,
+      "contrato": "-",
+      "distribuidora": "-",
+      "horarioDias": "08:00-22:00 • Seg/Ter/Qua/Qui/Sex",
+      "disponivel": true,
+      "createdAt": "2025-11-04T21:00:00.000Z",
+      "updatedAt": "2026-01-13T18:44:32.982Z",
+      "cep": " 22010-000",
+      "logradouro": "Avenida Atlântica",
+      "numero": "",
+      "bairro": "Copacabana",
+      "cidade": "Rio de Janeiro",
+      "uf": "RJ"
+    },
+    {
+      "id": "s2",
+      "userId": "h1",
+      "nome": "Posto Aero",
+      "acessoType": "Comercial",
+      "endereco": "Av. Aeroporto, 50",
+      "qtdDisponivel": 3,
+      "qtdTotal": 6,
+      "connectorType": "CC",
+      "tipo": "DC",
+      "potenciaKw": 60,
+      "precoKwh": 2.9,
+      "contrato": "-",
+      "distribuidora": "-",
+      "horarioDias": "08:00-00:00 • Seg/Ter/Qua/Qui/Sex/Sáb",
+      "disponivel": true,
+      "createdAt": "2025-11-04T21:00:00.000Z",
+      "updatedAt": "2026-01-13T17:49:59.880Z",
+      "cep": "20040-010",
+      "logradouro": "Avenida Presidente Vargas",
+      "numero": "50",
+      "bairro": "Centro",
+      "cidade": "Rio de Janeiro",
+      "uf": "RJ"
+    },
+    {
+      "id": "s3",
+      "userId": "h2",
+      "nome": "Parque Central",
+      "acessoType": "Residencial",
+      "endereco": "R. das Árvores, 200",
+      "qtdDisponivel": 2,
+      "qtdTotal": 2,
+      "connectorType": "Tipo 1",
+      "tipo": "AC",
+      "potenciaKw": 50,
+      "precoKwh": 3.1,
+      "contrato": "-",
+      "distribuidora": "-",
+      "horarioDias": "08:00-22:00 • Seg/Ter/Qua/Qui/Sex",
+      "disponivel": true,
+      "createdAt": "2025-11-04T21:00:00.000Z",
+      "updatedAt": "2026-01-13T17:01:31.268Z",
+      "cep": "24020-085",
+      "logradouro": "Rua da Conceição",
+      "numero": "200",
+      "bairro": "Centro",
+      "cidade": "Niterói",
+      "uf": "RJ"
+    },
+    {
+      "userId": "h1",
+      "nome": "Tijuca",
+      "acessoType": "Comercial",
+      "cep": "20550-000",
+      "logradouro": "Avenida Heitor Beltrão",
+      "numero": "10",
+      "bairro": "Tijuca",
+      "cidade": "Rio de Janeiro",
+      "uf": "RJ",
+      "endereco": "Avenida Heitor Beltrão 10 - Tijuca, Rio de Janeiro/RJ",
+      "qtdDisponivel": 1,
+      "qtdTotal": 1,
+      "connectorType": "GB/T(CA)",
+      "potenciaKw": 120,
+      "precoKwh": 2.95,
+      "contrato": "123546",
+      "distribuidora": "Light RJ",
+      "horarioDias": "08:00-22:00 • /Ter/Qua/Qui/",
+      "disponivel": true,
+      "createdAt": "2026-01-13T19:34:50.236Z",
+      "updatedAt": "2026-01-13T19:34:50.236Z",
+      "id": "xC_JM9F"
+    }
+  ]
+}
