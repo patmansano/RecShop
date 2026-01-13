@@ -1,0 +1,57 @@
+# Node / Vite / React
+node_modules/
+npm-debug.log*
+yarn-debug.log*
+yarn-error.log*
+pnpm-debug.log*
+.pnpm-debug.log*
+.DS_Store
+dist/
+build/
+coverage/
+*.log
+*.log.*
+
+# Env & secrets
+.env
+.env.*
+**/*.env
+*.local
+
+# IDE / Editor
+.idea/
+.vscode/*
+!.vscode/extensions.json
+*.swp
+*.swo
+*.swn
+*.swm
+
+# OS
+Thumbs.db
+ehthumbs.db
+
+# Mongo / data
+data/
+dump/
+
+# Runtime
+.cache/
+.parcel-cache/
+
+# API
+api/.env
+api/.env.*
+
+# React
+react/.env
+react/.env.*
+
+# Misc
+*.tgz
+*.zip
+*.tar
+
+# Do not version sensitive files
+SENHA ADM.txt
+

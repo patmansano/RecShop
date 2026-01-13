@@ -63,7 +63,7 @@ export default function Estacoes() {
     });
   }
   function startEdit(s) {
-    setEditing(s.id);
+    setEditing(s.id || s._id);
     setShowForm(true);
     setForm({
       userId: s.userId || '',
@@ -147,13 +147,20 @@ export default function Estacoes() {
       qtdDisponivel: safeDisp,
       qtdTotal: safeTotal
     };
-    if (editing) await stationsApi.update(editing, payload);
-    else await stationsApi.add(payload);
+    if (editing) {
+      await stationsApi.update(editing, payload);
+    } else {
+      await stationsApi.add(payload);
+    }
     await load();
     startNew();
     setShowForm(false);
   }
   async function onRemove(id) {
+    if (!id) {
+      alert('ID da estação inválido');
+      return;
+    }
     await stationsApi.remove(id);
     await load();
   }
@@ -305,7 +312,7 @@ export default function Estacoes() {
                 const horas = hd[0] || (s.horarioDias || '').trim();
                 const dias = hd.length > 1 ? hd[1] : '';
                 return (
-                  <tr key={s.id}>
+                  <tr key={s.id || s._id}>
                     <td className="fw-semibold cell-nowrap">
                       {u ? (
                         <div>{u.nome}<div className="small text-muted">({u.role})</div></div>
@@ -340,11 +347,11 @@ export default function Estacoes() {
                         >
                           <i className="bi bi-clock-history"></i>
                         </button>
-                        <button className="btn btn-sm btn-outline-success" title="Alternar aberto/fechado" onClick={async()=>{ await stationsApi.update(s.id, { disponivel: !s.disponivel }); await load(); }}>
+                        <button className="btn btn-sm btn-outline-success" title="Alternar aberto/fechado" onClick={async()=>{ await stationsApi.update(s.id || s._id, { disponivel: !s.disponivel }); await load(); }}>
                           {s.disponivel ? <i className="bi bi-toggle-on"></i> : <i className="bi bi-toggle-off"></i>}
                         </button>
                         <button className="btn btn-sm btn-outline-primary" onClick={()=>startEdit(s)}><i className="bi bi-pencil"></i></button>
-                        <button className="btn btn-sm btn-outline-danger" onClick={()=>onRemove(s.id)}><i className="bi bi-trash"></i></button>
+                        <button className="btn btn-sm btn-outline-danger" onClick={()=>onRemove(s.id || s._id)}><i className="bi bi-trash"></i></button>
                       </div>
                     </td>
                   </tr>

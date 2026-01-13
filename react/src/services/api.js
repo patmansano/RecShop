@@ -2,6 +2,17 @@ const KEY = (name) => `recshop:${name}`;
 const HTTP_BASE = (typeof import.meta !== 'undefined' && import.meta.env && import.meta.env.VITE_API_BASE) || 'http://localhost:3000';
 const USE_HTTP = (typeof import.meta !== 'undefined' && import.meta.env && import.meta.env.VITE_USE_API === 'true') || false;
 
+function normalizeUser(u) {
+  if (!u) return null;
+  const id = u.id || u._id;
+  return { ...u, id };
+}
+function normalizeStation(s) {
+  if (!s) return null;
+  const id = s.id || s._id;
+  return { ...s, id };
+}
+
 function tokenKey(){ return KEY('authToken'); }
 function getToken(){
   try{ return localStorage.getItem(tokenKey()) || null; }catch(_e){ return null; }
@@ -96,12 +107,12 @@ ensureSeed();
 export const api = {
   // Auth
   getCurrentUser() {
-    return readLocal(KEY('currentUser'), null);
+    return normalizeUser(readLocal(KEY('currentUser'), null));
   },
   async login({ email, password }) {
     if (USE_HTTP) {
       // rota dedicada de login
-      const user = await http('POST', `/auth/login`, { email, password });
+      const user = normalizeUser(await http('POST', `/auth/login`, { email, password }));
       if (!user) throw new Error('Credenciais inválidas');
       if (user.token) setToken(user.token);
       writeLocal(KEY('currentUser'), user);
@@ -111,15 +122,16 @@ export const api = {
       const found = users.find((u) => u.email === email && (password ? u.password === password : true));
       if (!found) throw new Error('Credenciais inválidas');
       setToken('local-dev-token');
-      writeLocal(KEY('currentUser'), found);
-      return found;
+      const normalized = normalizeUser(found);
+      writeLocal(KEY('currentUser'), normalized);
+      return normalized;
     }
   },
   async signup({ nome, email, password, role }) {
     if (USE_HTTP) {
       const dup = await http('GET', `/users?email=${encodeURIComponent(email)}`);
       if (Array.isArray(dup) && dup.length) throw new Error('E-mail já cadastrado');
-      const user = await http('POST', `/users`, { nome, email, password, role });
+      const user = normalizeUser(await http('POST', `/users`, { nome, email, password, role }));
       if (user.token) setToken(user.token);
       writeLocal(KEY('currentUser'), user);
       return user;
@@ -131,11 +143,12 @@ export const api = {
       users.push(user);
       writeLocal(KEY('users'), users);
       setToken('local-dev-token');
-      writeLocal(KEY('currentUser'), user);
+      const normalized = normalizeUser(user);
+      writeLocal(KEY('currentUser'), normalized);
       writeLocal(KEY(`wallet:${id}`), { saldo: 0.0 });
       writeLocal(KEY(`cards:${id}`), []);
       writeLocal(KEY(`history:${id}`), []);
-      return user;
+      return normalized;
     }
   },
   async logout() {
@@ -477,18 +490,18 @@ export const usersApi = {
 // Stations CRUD
 export const stationsApi = {
   async list() {
-    if (USE_HTTP) return await http('GET', `/stations`);
-    return readLocal(KEY('stations'), []);
+    if (USE_HTTP) return (await http('GET', `/stations`)).map(normalizeStation);
+    return readLocal(KEY('stations'), []).map(normalizeStation);
   },
   async listByUser(userId) {
-    if (USE_HTTP) return await http('GET', `/stations?userId=${encodeURIComponent(userId)}`);
-    const all = readLocal(KEY('stations'), []);
+    if (USE_HTTP) return (await http('GET', `/stations?userId=${encodeURIComponent(userId)}`)).map(normalizeStation);
+    const all = readLocal(KEY('stations'), []).map(normalizeStation);
     return all.filter(s => s.userId === userId);
   },
   async add(station) {
     if (USE_HTTP) {
       const now = new Date().toISOString();
-      return await http('POST', `/stations`, { ...station, createdAt: now, updatedAt: now });
+      return normalizeStation(await http('POST', `/stations`, { ...station, createdAt: now, updatedAt: now }));
     } else {
       const list = readLocal(KEY('stations'), []);
       const item = { id: `s${Math.random().toString(36).slice(2,8)}`, createdAt: new Date().toISOString(), updatedAt: new Date().toISOString(), ...station };
@@ -499,7 +512,7 @@ export const stationsApi = {
   },
   async update(id, patch) {
     if (USE_HTTP) {
-      return await http('PATCH', `/stations/${encodeURIComponent(id)}`, { ...patch, updatedAt: new Date().toISOString() });
+      return normalizeStation(await http('PATCH', `/stations/${encodeURIComponent(id)}`, { ...patch, updatedAt: new Date().toISOString() }));
     } else {
       const list = readLocal(KEY('stations'), []);
       const idx = list.findIndex(s => s.id === id);
@@ -510,12 +523,13 @@ export const stationsApi = {
     }
   },
   async remove(id) {
+    if (!id) throw new Error('invalid_station_id');
     if (USE_HTTP) {
       await http('DELETE', `/stations/${encodeURIComponent(id)}`);
       return true;
     } else {
       const list = readLocal(KEY('stations'), []);
-      writeLocal(KEY('stations'), list.filter(s => s.id !== id));
+      writeLocal(KEY('stations'), list.filter(s => (s.id || s._id) !== id));
       return true;
     }
   }
