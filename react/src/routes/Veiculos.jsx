@@ -5,6 +5,8 @@ import { getBrandOptions, getModelsByBrand } from '../data/evs.js';
 
 export default function Veiculos() {
   const { state } = useStore();
+  const role = state.user?.role || 'guest';
+  const canManage = role === 'driver' || role === 'host' || role === 'admin';
   const [nome, setNome] = React.useState('');
   const [placa, setPlaca] = React.useState('');
   const [conector, setConector] = React.useState('Tipo 1');
@@ -19,10 +21,14 @@ export default function Veiculos() {
   const [users, setUsers] = React.useState([]);
   const [selectedUserId, setSelectedUserId] = React.useState(null);
   const isAdmin = state.user?.role === 'admin';
+  // Usuário selecionado para o cadastro (apenas admin pode escolher)
+  const [formUserId, setFormUserId] = React.useState('');
 
   React.useEffect(() => {
     if (state.user) {
+      // driver/host: somente seus veículos; admin: pode ver todos
       setSelectedUserId(isAdmin ? '__all' : state.user.id);
+      setFormUserId(isAdmin ? '' : state.user.id);
     }
   }, [state.user]);
 
@@ -58,6 +64,7 @@ export default function Veiculos() {
     setModel('');
     setBrandOther('');
     setModelOther('');
+    setFormUserId(isAdmin ? '' : state.user?.id || '');
   }
 
   async function onSave(e) {
@@ -66,6 +73,21 @@ export default function Veiculos() {
     const selModel = model === 'Outros' ? modelOther.trim() : model.trim();
     const finalName = (selBrand || selModel) ? `${selBrand} ${selModel}`.trim() : nome.trim();
     if (!finalName) return;
+    // valida usuário destino quando admin
+    let ownerUserId = state.user?.id || '';
+    if (isAdmin) {
+      if (!formUserId || formUserId === '__all') {
+        alert('Selecione um usuário (Driver ou Admin) para este veículo.');
+        return;
+      }
+      ownerUserId = formUserId;
+      // valida role do usuário selecionado
+      const target = users.find(u => u.id === ownerUserId);
+      if (!target || (target.role !== 'driver' && target.role !== 'admin')) {
+        alert('Este veículo só pode ser associado a usuário Driver ou Admin.');
+        return;
+      }
+    }
     const payload = {
       nome: finalName,
       marca: selBrand || null,
@@ -75,23 +97,40 @@ export default function Veiculos() {
       bateriaKwh: bateria ? Number(bateria) : 0
     };
     if (editingId) {
-      await vehiclesApi.update(selectedUserId, editingId, payload);
+      await vehiclesApi.update(isAdmin ? ownerUserId : selectedUserId, editingId, payload);
     } else {
-      await vehiclesApi.add(selectedUserId, payload);
+      await vehiclesApi.add(ownerUserId, payload);
     }
-    const list = await vehiclesApi.list(selectedUserId);
+    const list = await (isAdmin && selectedUserId === '__all'
+      ? vehiclesApi.listAll()
+      : vehiclesApi.list(isAdmin ? selectedUserId : ownerUserId));
     setVehicles(Array.isArray(list) ? list : []);
     resetForm();
   }
 
-  async function onRemove(id) {
-    await vehiclesApi.remove(selectedUserId, id);
-    const list = await vehiclesApi.list(selectedUserId);
-    setVehicles(Array.isArray(list) ? list : []);
+  async function onRemove(vehicle) {
+    if (!canManage) return;
+    const ok = window.confirm('Confirmar exclusão do veículo?');
+    if (!ok) return;
+    try{
+      const ownerId = vehicle?.userId || (isAdmin ? formUserId : state.user?.id);
+      const vid = vehicle.id || vehicle._id;
+      await vehiclesApi.remove(ownerId, vid);
+      const list = await (isAdmin && selectedUserId === '__all'
+        ? vehiclesApi.listAll()
+        : vehiclesApi.list(isAdmin ? selectedUserId : ownerId));
+      setVehicles(Array.isArray(list) ? list : []);
+    }catch(_e){}
   }
 
   function onEdit(v) {
-    setEditingId(v.id);
+    if (!canManage) return;
+    setEditingId(v.id || v._id);
+    if (isAdmin) {
+      setFormUserId(v.userId || '');
+    } else {
+      setFormUserId(state.user?.id || '');
+    }
     setNome(v.nome || '');
     setPlaca(v.placa || '');
     setConector(v.conector || 'Tipo 1');
@@ -125,6 +164,7 @@ export default function Veiculos() {
       <h1 className="h4 mb-3"><i className="bi bi-car-front"></i> Veículos</h1>
       <div className="card mb-3">
         <div className="card-body">
+          {/* Filtro por usuário (somente para admin) */}
           {isAdmin ? (
             <div className="row g-2 mb-2">
               <div className="col-md-4">
@@ -136,13 +176,26 @@ export default function Veiculos() {
               </div>
             </div>
           ) : null}
-          <div className="d-flex justify-content-end">
-            <button className="btn btn-sm btn-rec" onClick={(e)=>{ e.preventDefault(); setShowForm(true); setEditingId(null); setNome(''); setPlaca(''); setConector('Tipo 1'); setBateria(''); }}>
-              <i className="bi bi-plus-circle"></i> Novo cadastro
-            </button>
-          </div>
-          {showForm ? (
+          {canManage && !editingId ? (
+            <div className="d-flex justify-content-end">
+              <button className="btn btn-sm btn-rec" onClick={(e)=>{ e.preventDefault(); setShowForm(true); setEditingId(null); setNome(''); setPlaca(''); setConector('Tipo 1'); setBateria(''); }}>
+                <i className="bi bi-plus-circle"></i> Novo cadastro
+              </button>
+            </div>
+          ) : null}
+          {showForm && canManage ? (
             <form className="row g-2 mt-2" onSubmit={onSave}>
+              {isAdmin ? (
+                <div className="col-md-4">
+                  <label className="form-label">Usuário</label>
+                  <select className="form-select" value={formUserId} onChange={(e)=>setFormUserId(e.target.value)}>
+                    <option value="">Selecione um usuário</option>
+                    {users.filter(u => u.role === 'driver' || u.role === 'admin').map(u => (
+                      <option key={u.id} value={u.id}>{u.nome} ({u.role})</option>
+                    ))}
+                  </select>
+                </div>
+              ) : null}
               <div className="col-md-3">
                 <label className="form-label">Marca</label>
                 <select className="form-select" value={brand} onChange={(e)=>{ setBrand(e.target.value); setModel(''); setBrandOther(''); }}>
@@ -204,7 +257,7 @@ export default function Veiculos() {
             </thead>
             <tbody>
               {vehicles?.length ? vehicles.map((v)=>(
-                <tr key={v.id}>
+                <tr key={v.id || v._id}>
                   {isAdmin ? <td>{users.find(u => u.id === v.userId)?.nome || '-'}</td> : null}
                   <td className="fw-semibold">{v.nome || `${v.marca || ''} ${v.modelo || ''}`.trim()}</td>
                   <td>{v.placa}</td>
@@ -212,20 +265,28 @@ export default function Veiculos() {
                   <td>{v.bateriaKwh != null ? v.bateriaKwh : '-'}</td>
                   <td className="text-end">
                     <div className="btn-group">
-                      <button className={`btn btn-sm ${v.isActive === false ? 'btn-outline-success' : 'btn-outline-secondary'}`} title="Ativar/Inativar" onClick={async()=>{
-                        await vehiclesApi.update(selectedUserId, v.id, { isActive: !(v.isActive !== false) });
-                        const list = await vehiclesApi.list(selectedUserId);
-                        setVehicles(Array.isArray(list) ? list : []);
-                      }}>
-                        <i className={`bi ${v.isActive === false ? 'bi-toggle-on' : 'bi-toggle-off'}`}></i>
-                      </button>
+                      {/* Histórico pode ficar visível para qualquer perfil */}
                       <button className="btn btn-sm btn-outline-secondary" title="Histórico" onClick={()=>{
                         alert(`Criado: ${v.createdAt ? new Date(v.createdAt).toLocaleString() : '-'}\nModificado: ${v.updatedAt ? new Date(v.updatedAt).toLocaleString() : '-'}`);
                       }}>
                         <i className="bi bi-clock-history"></i>
                       </button>
-                      <button className="btn btn-sm btn-outline-primary" onClick={()=>onEdit(v)}><i className="bi bi-pencil"></i></button>
-                      <button className="btn btn-sm btn-outline-danger" onClick={()=>onRemove(v.id)}><i className="bi bi-trash"></i></button>
+                      {/* Ações de gestão apenas para driver/host */}
+                      {canManage ? (
+                        <>
+                          <button className={`btn btn-sm ${v.isActive === false ? 'btn-outline-success' : 'btn-outline-secondary'}`} title="Ativar/Inativar" onClick={async()=>{
+                            await vehiclesApi.update(selectedUserId, v.id || v._id, { isActive: !(v.isActive !== false) });
+                            const list = await (isAdmin && selectedUserId === '__all'
+                              ? vehiclesApi.listAll()
+                              : vehiclesApi.list(isAdmin ? selectedUserId : state.user?.id));
+                            setVehicles(Array.isArray(list) ? list : []);
+                          }}>
+                            <i className={`bi ${v.isActive === false ? 'bi-toggle-on' : 'bi-toggle-off'}`}></i>
+                          </button>
+                          <button className="btn btn-sm btn-outline-primary" onClick={()=>onEdit(v)}><i className="bi bi-pencil"></i></button>
+                          <button className="btn btn-sm btn-outline-danger" onClick={()=>onRemove(v)}><i className="bi bi-trash"></i></button>
+                        </>
+                      ) : null}
                     </div>
                   </td>
                 </tr>
